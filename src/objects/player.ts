@@ -22,7 +22,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.cursors.left.isDown ) {
             this.setVelocityX(-200)
             this.flipX = true
-            console.log("ik ga links")
         } 
         
         if (this.cursors.right.isDown) {

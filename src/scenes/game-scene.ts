@@ -5,6 +5,7 @@ import { MovingPlatform } from "../objects/movingplatform"
 import { Bomb } from "../objects/bomb"
 import { Cameras } from "phaser";
 import { platform } from "os";
+import { Key } from "../objects/key";
 
 export class GameScene extends Phaser.Scene {
     
@@ -15,6 +16,8 @@ export class GameScene extends Phaser.Scene {
     private water: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
+    private door: Door
+    private key: Key
 
     constructor() {
         super({ key: "GameScene" })
@@ -38,9 +41,21 @@ export class GameScene extends Phaser.Scene {
         this.bombs = this.add.group()
         this.bombs.add(new Bomb(this, 200, 390), true)
         this.bombs.add(new Bomb(this, 150, 200), true)
+        
+        // this.key = this.physics.add.group({
+        //     key : 'key',
 
+
+        //   })
+
+
+        this.key = new Key(this, 300,300, 'key')
         // TODO add player
         this.player = new Player(this)
+
+        // this.physics.add.collider(this.player, this.key)
+        this.physics.add.overlap(this.key, this.player, this.removeKey, null, this)
+        
 
         this.platforms = this.add.group({ runChildUpdate: true })
         this.platforms.addMultiple([
@@ -71,9 +86,11 @@ export class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.stars, this.platforms)
         this.physics.add.collider(this.bombs, this.platforms)
         this.physics.add.collider(this.player, this.platforms)
+        //this.physics.add.collider(this.key, this.platforms)
         
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
         this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
+
 
         this.physics.world.bounds.width = 770
         this.physics.world.bounds.height = 450
@@ -86,7 +103,10 @@ export class GameScene extends Phaser.Scene {
         this.bombs.remove(bomb, true, true)
         this.scene.start('Level2')
     }
-
+    private hitKey(player:Player, key){
+        this.key.remove(key, true, true)
+       this.door.remove(Door, true, true)
+    }
     private collectStar(player : Player , star) : void {
         this.stars.remove(star, true, true)
         this.registry.values.score++
@@ -94,8 +114,12 @@ export class GameScene extends Phaser.Scene {
         console.log(this.registry.values.score + ' sterren')
 
         // TO DO check if we have all the stars, then go to the end scene'
-        this.scoreField.text = this.collectedBanana + ' Bananas collected'
+        this.scoreField.text = ' Find the Key!'
     
+    }
+
+    public removeKey(key:Key){
+        console.log("de sleutel is weg")
     }
 
     update(){

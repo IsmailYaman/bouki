@@ -34,6 +34,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image('player', require('../assets/player.png'))
         this.load.image('ice', require('../assets/platform_ice.png'))
         this.load.image('platform', require('../assets/platform_grass.png'))
+        this.load.image('key', require('../assets/key.png'))
 
         this.load.on('complete', () => {
             console.log("everything is loaded")
