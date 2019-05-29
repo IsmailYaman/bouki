@@ -2,15 +2,14 @@ import "phaser";
 import { BootScene } from "./scenes/boot-scene"
 import { StartScene } from "./scenes/start-scene"
 import { GameScene } from "./scenes/game-scene"
-import { LevelTwoScene } from "./scenes/LevelTwo-scene"
 import { EndScene } from "./scenes/end-scene"
 
 const config: GameConfig = {
-    width: 800,
-    height: 600,
+    width: 770,
+    height: 450,
     parent: "game",
     resolution: window.devicePixelRatio,
-    scene: [BootScene, StartScene, GameScene, LevelTwoScene, EndScene],
+    scene: [BootScene, StartScene, GameScene, EndScene],
     input: {
         keyboard: true
     },
@@ -18,7 +17,7 @@ const config: GameConfig = {
         default: "arcade",
         arcade: {
             debug: false, 
-            gravity: { y: 400 }
+            // gravity: { y: 400 }
         }
     },
     render: { pixelArt: true }

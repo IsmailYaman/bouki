@@ -26,7 +26,7 @@ export class MovingPlatform extends Phaser.Physics.Arcade.Sprite {
         if (this.x>= this.startPosition + 150) {
             this.setVelocityX(-50)
         }
-        else if (this.x <= this.startPosition - 150) {
+        else if (this.x <= this.startPosition) {
             this.setVelocityX(50)
         }
     }
