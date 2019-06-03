@@ -1,15 +1,11 @@
 export class Key extends Phaser.Physics.Arcade.Sprite {
-    remove: any;
-    add: any;
- 
-    constructor(scene, x,y, texture:string) {       
-        super(scene, x, y, texture)
 
-        this.scene.add.existing(this)
+    constructor(scene, x,y) {
+        super(scene, x, y, "key")
 
+        this.scene.physics.add.existing(this)
 
-        
-
+        this.setCollideWorldBounds(true)
 
     }
 }

@@ -22,21 +22,25 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.cursors.left.isDown ) {
             this.setVelocityX(-200)
             this.flipX = true
+            console.log("ik ga links")
         } 
         
         if (this.cursors.right.isDown) {
             this.setVelocityX(200)
             this.flipX = false
+            console.log("ik ga rechts")
         } 
         
         if (this.cursors.up.isDown) {
             this.setVelocityY(-200)
             this.flipX = false
+            console.log("ik ga boven")
         } 
         
         if (this.cursors.down.isDown) {
             this.setVelocityY(200)
             this.flipX = false
+            console.log("ik ga beneden")
         } 
 
         // jump when the body is touching the floor
