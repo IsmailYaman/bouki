@@ -21,6 +21,9 @@ export class Level1 extends Phaser.Scene {
     private banana: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
+    private graphics
+    public lives = 300
+
 
     constructor() {
         super({ key: "Level1" })
@@ -34,6 +37,8 @@ export class Level1 extends Phaser.Scene {
         this.input.once('pointerdown', (pointer) => {
             this.scene.start('level2')
             console.log('volgend level')
+
+            this.graphics = this.add.graphics({ fillStyle: { color: 0x00AA00 } })
             
         })
         
@@ -111,7 +116,11 @@ export class Level1 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
-        
+
+        this.add.image(400, 20, 'heart')
+        this.add.image(360, 20, 'heart')
+        this.add.image(440, 20, 'heart')
+
 
         this.physics.world.bounds.width = 770
         this.physics.world.bounds.height = 450
@@ -159,6 +168,10 @@ export class Level1 extends Phaser.Scene {
         this.input.once('pointerdown', (pointer) => {
             this.scene.start('level')
             console.log('volgend level')
+
+            this.graphics.clear()
+            this.graphics.fillRectShape(new Phaser.Geom.Rectangle(400, 200, this.lives, 20))
+            
         })
         // this.add.text(170, 50,' Sterren', { fontFamily: 'Arial Black', fontSize: 40, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
     }
