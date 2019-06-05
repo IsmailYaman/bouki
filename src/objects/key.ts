@@ -8,4 +8,4 @@ export class Key extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true)
 
     }
-}
+} 

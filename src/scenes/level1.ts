@@ -2,6 +2,7 @@ import { Player } from "../objects/player"
 import { Platform } from "../objects/platform"
 import { Key } from "../objects/key"
 import { Door } from "../objects/door"
+import { Door1 } from "../objects/door1"
 import { MovingPlatform } from "../objects/movingplatform"
 import { Bomb } from "../objects/bomb"
 import { Cameras } from "phaser";
@@ -15,10 +16,11 @@ export class Level1 extends Phaser.Scene {
     private stars: Phaser.Physics.Arcade.Group
     private bombs: Phaser.GameObjects.Group
     private key: Phaser.GameObjects.Group
+    private door: Phaser.GameObjects.Group
+    private door1: Phaser.GameObjects.Group
     private banana: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
-    door: any;
 
     constructor() {
         super({ key: "Level1" })
@@ -44,6 +46,12 @@ export class Level1 extends Phaser.Scene {
             repeat: 11,
             setXY: { x: 12, y: 60, stepX: 70 },
         })
+
+        this.door = this.add.group()
+        this.door.add(new Door(this, 240, 140), true)
+
+        this.door1 = this.add.group()
+        this.door1.add(new Door1(this, 420, 370), true)
 
         this.key = this.add.group()
         this.key.add(new Key(this, 480, 300), true)
@@ -78,8 +86,6 @@ export class Level1 extends Phaser.Scene {
             new Platform(this, 220, 350, "wall4"),
             new Platform(this, 420, 211, "wall2"),
             // new Platform(this, 460, 100, "wall2b"),
-            new Door(this, 240, 140, "door"),
-            new Platform(this, 420, 370, "door1"),
             new Platform(this, 585, 132, "S"),
             // new Platform(this, 500, 350, "ice"),
             // new Platform(this, 250, 450, "platform"),
@@ -91,12 +97,17 @@ export class Level1 extends Phaser.Scene {
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.stars, this.platforms)
         this.physics.add.collider(this.bombs, this.platforms)
+        this.physics.add.collider(this.bombs, this.door)
+        this.physics.add.collider(this.bombs, this.door1)
         this.physics.add.collider(this.player, this.platforms)
+        this.physics.add.collider(this.player, this.door)
+        this.physics.add.collider(this.player, this.door1)
         
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
         this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
+        
 
         this.physics.world.bounds.width = 770
         this.physics.world.bounds.height = 450
@@ -118,8 +129,11 @@ export class Level1 extends Phaser.Scene {
     }
 
     private hitKey(player:Player, key){
+        console.log(key);
+        
         this.key.remove(key, true, true)
-        // this.door.remove(Door, true, true)
+        this.door.remove(this.door.children.entries[0], true, true)
+        this.door1.remove(this.door1.children.entries[0], true, true)
         console.log("Deur is open!")
     1   
     }
