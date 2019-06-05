@@ -28,12 +28,13 @@ export class Level1 extends Phaser.Scene {
         console.log("dit is level 1")
         this.registry.values.score = 0
     }
-fkey
     create(): void {
         this.input.once('pointerdown', (pointer) => {
             this.scene.start('level2')
             console.log('volgend level')
+            
         })
+        
 
         this.add.image(0, 0, 'ground').setOrigin(0, 0)      
         
@@ -54,10 +55,13 @@ fkey
         this.bombs.add(new Bomb(this, 200, 390), true)
         this.bombs.add(new Bomb(this, 150, 200), true)
 
+        
+
         // TODO add player
         this.player = new Player(this)
 
         this.platforms = this.add.group({ runChildUpdate: true })
+        
         this.platforms.addMultiple([
             
             new Platform(this, 20, 225, "caveleft"),
@@ -73,15 +77,17 @@ fkey
             new Platform(this, 160, 140, "wall3"),
             new Platform(this, 220, 350, "wall4"),
             new Platform(this, 420, 211, "wall2"),
+            // new Platform(this, 460, 100, "wall2b"),
             new Door(this, 240, 140, "door"),
             new Platform(this, 420, 370, "door1"),
             new Platform(this, 585, 132, "S"),
             // new Platform(this, 500, 350, "ice"),
             // new Platform(this, 250, 450, "platform"),
             // new MovingPlatform(this, 100, 250, "platform"),
+            
         ], true)
-        
-        this.scoreField = this.add.text(250, 20, this.collectedBanana + ' Bananas collected', { fontFamily: 'Arial Black', fontSize: 40, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
+        this.add.text(710, 20, 'Level 1', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('black', 5)
+        this.scoreField = this.add.text(150, 20, this.collectedBanana + ' Bananas collected', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.stars, this.platforms)
         this.physics.add.collider(this.bombs, this.platforms)
@@ -126,6 +132,7 @@ fkey
 
         // TO DO check if we have all the stars, then go to the end scene'
         this.scoreField.text = this.collectedBanana + ' Bananas collected'
+        
     
     }
 
