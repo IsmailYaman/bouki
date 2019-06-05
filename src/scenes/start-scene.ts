@@ -19,7 +19,7 @@ export class StartScene extends Phaser.Scene {
         // add text here
         this.add.image(220, 100, 'start').setOrigin(0, 0)
 
-        this.add.text(385, 300, 'Click anywhere', { fontFamily: 'Arial Black', fontSize: 35, color: 'grey' }).setOrigin(0.5).setStroke('black', 5)
+        this.add.text(385, 300, ' Click anywhere', { fontFamily: 'Arial Black', fontSize: 60, color: 'grey' }).setOrigin(0.5).setStroke('black', 5)
 
         // add code here to switch to the GameScene, after a mouse click
 
