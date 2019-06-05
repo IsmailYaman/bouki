@@ -86,8 +86,6 @@ export class Level1 extends Phaser.Scene {
             new Platform(this, 220, 350, "wall4"),
             new Platform(this, 420, 211, "wall2"),
             // new Platform(this, 460, 100, "wall2b"),
-            new Door(this, 240, 140, "door"),
-            new Platform(this, 420, 370, "door1"),
             new Platform(this, 585, 132, "S"),
             // new Platform(this, 500, 350, "ice"),
             // new Platform(this, 250, 450, "platform"),
