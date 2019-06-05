@@ -1,7 +1,7 @@
-export class Door extends Phaser.Physics.Arcade.Sprite {
+export class Door1 extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene, x,y) {
-        super(scene, x, y, "door")
+        super(scene, x, y, "door1")
 
         this.scene.physics.add.existing(this)
 
