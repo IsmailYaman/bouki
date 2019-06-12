@@ -23,6 +23,9 @@ export class Level1 extends Phaser.Scene {
     private enemy: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
+    private graphics
+    public lives = 300
+
 
     constructor() {
         super({ key: "Level1" })
@@ -36,6 +39,8 @@ export class Level1 extends Phaser.Scene {
         this.input.once('pointerdown', (pointer) => {
             this.scene.start('level2')
             console.log('volgend level')
+
+            this.graphics = this.add.graphics({ fillStyle: { color: 0x00AA00 } })
             
         })
         
@@ -117,10 +122,22 @@ export class Level1 extends Phaser.Scene {
             new Platform(this, 520, 232, "wall1"),
             new Platform(this, 300, 159, "wall2"),
             new Platform(this, 160, 140, "wall3"),
+            new Platform(this, 565, 112, "wall3"),
+            new Platform(this, 625, 152, "wall3b"),
             new Platform(this, 220, 350, "wall4"),
             new Platform(this, 420, 211, "wall2"),
+<<<<<<< HEAD
             new Platform(this, 585, 132, "S"), 
             // new MovingPlatform(this, 250, 150, "platform"),
+=======
+            new Platform(this, 505, 132, "wall2b"),
+            new Platform(this, 665, 132, "wall2b"),
+            
+            // new Platform(this, 585, 132, "S"),
+            // new Platform(this, 500, 350, "ice"),
+            // new Platform(this, 250, 450, "platform"),
+            // new MovingPlatform(this, 100, 250, "platform"),
+>>>>>>> 27a235d05d6fbc9d71d14c391a57eccc9c43301d
             
         ], true)
 
@@ -140,9 +157,17 @@ export class Level1 extends Phaser.Scene {
         // this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
+<<<<<<< HEAD
         this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
         
         
+=======
+
+        this.add.image(400, 20, 'heart')
+        this.add.image(360, 20, 'heart')
+        this.add.image(440, 20, 'heart')
+
+>>>>>>> 27a235d05d6fbc9d71d14c391a57eccc9c43301d
 
         this.physics.world.bounds.width = 770
         this.physics.world.bounds.height = 450
@@ -196,6 +221,10 @@ export class Level1 extends Phaser.Scene {
         this.input.once('pointerdown', (pointer) => {
             this.scene.start('level')
             console.log('volgend level')
+
+            this.graphics.clear()
+            this.graphics.fillRectShape(new Phaser.Geom.Rectangle(400, 200, this.lives, 20))
+            
         })
         // this.add.text(170, 50,' Sterren', { fontFamily: 'Arial Black', fontSize: 40, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
     }

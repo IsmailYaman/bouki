@@ -1,6 +1,8 @@
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
     private cursors: Phaser.Input.Keyboard.CursorKeys
+    public currentHealth = 100;
+    private maxHealth = 100;
 
     constructor(scene) {
         
@@ -19,36 +21,54 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     
     public update(): void {
         
+        
         if (this.cursors.left.isDown ) {
             this.setVelocityX(-200)
             this.flipX = true
-            console.log("ik ga links")
         } 
         
         if (this.cursors.right.isDown) {
             this.setVelocityX(200)
             this.flipX = false
-            console.log("ik ga rechts")
         } 
         
         if (this.cursors.up.isDown) {
             this.setVelocityY(-200)
-            this.flipX = false
-            console.log("ik ga boven")
         } 
         
         if (this.cursors.down.isDown) {
             this.setVelocityY(200)
-            this.flipX = false
-            console.log("ik ga beneden")
         } 
 
-        // jump when the body is touching the floor
+        if(this.cursors.down.isDown && this.cursors.left.isDown){
+            this.flipX = true
+
+        }
+
+        if(this.cursors.up.isDown && this.cursors.left.isDown){
+            this.flipX = true
+        }
+
+        if(this.cursors.down.isDown && this.cursors.right.isDown){
+            this.flipX = false
+        }
+        if(this.cursors.up.isDown && this.cursors.right.isDown){
+            this.flipX = false
+        }
+
+        if (this.cursors.down.isDown || this.cursors.up.isDown || this.cursors.right.isDown || this.cursors.left.isDown){
+            console.log('Ik beweeg')
+        }
+
+        // Jumping
         
         // let grounded = this.body.touching.down 
         // if (this.cursors.up.isDown && grounded) {
         //     this.setVelocityY(-350)
         // }
+
+        //lives
+        
         
     }
 }
