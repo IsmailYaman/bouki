@@ -32,15 +32,13 @@ export class BootScene extends Phaser.Scene {
 
         this.load.image('mazewall', require('../assets/mazewall.png'))
         this.load.image('mazewall1', require('../assets/mazewall1.png'))
-<<<<<<< HEAD
         this.load.image('mazewall2', require('../assets/mazewall2.png'))
         this.load.image('mazewall3', require('../assets/mazewall3.png'))
         // this.load.image('mazewall', require('../assets/mazewall.png'))
         // this.load.image('mazewall', require('../assets/mazewall.png'))
         // this.load.image('mazewall', require('../assets/mazewall.png'))
         // this.load.image('mazewall', require('../assets/mazewall.png'))
-=======
->>>>>>> 27a235d05d6fbc9d71d14c391a57eccc9c43301d
+
         this.load.image('bananaS', require('../assets/bananaS.png'))
         this.load.image('bananaL', require('../assets/bananaL.png'))
         this.load.image('key', require('../assets/key.png'))
@@ -54,11 +52,9 @@ export class BootScene extends Phaser.Scene {
         this.load.on('complete', () => {
             console.log("everything is loaded")
             // add code here to switch to the start scene
-<<<<<<< HEAD
             this.scene.start("level2")
-=======
             this.scene.start("StartScene")
->>>>>>> 27a235d05d6fbc9d71d14c391a57eccc9c43301d
+            this.scene.start("StartScene")
         })
     }
 }

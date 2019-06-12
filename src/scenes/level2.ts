@@ -55,7 +55,6 @@ export class level2 extends Phaser.Scene {
             new Platform(this, 385, 20, "cavetop"),
             new Platform(this, 385, 430, "cavebot"),
             new Platform(this, 750, 225, "caveright"),
-<<<<<<< HEAD
             new Platform(this, 114, 141, "mazewall"),
             new Platform(this, 312, 141, "mazewall"),
             new Platform(this, 165, 241, "mazewall2"),
@@ -65,7 +64,6 @@ export class level2 extends Phaser.Scene {
             
             
 
-=======
             new Platform(this, 80, 130, "mazewall"),
             new Platform(this, 80, 291, "mazewall1"),
             // new Platform(this, 665, 291, "wall"),
@@ -78,7 +76,6 @@ export class level2 extends Phaser.Scene {
             // new Platform(this, 240, 140, "door"),
             // new Platform(this, 420, 370, "door1"),
             // new Platform(this, 585, 132, "S"),
->>>>>>> 27a235d05d6fbc9d71d14c391a57eccc9c43301d
             // new Platform(this, 200,200, "key"),
             // new Platform(this, 500, 350, "ice"),
             // new Platform(this, 250, 450, "platform"),

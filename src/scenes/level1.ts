@@ -126,10 +126,8 @@ export class Level1 extends Phaser.Scene {
             new Platform(this, 625, 152, "wall3b"),
             new Platform(this, 220, 350, "wall4"),
             new Platform(this, 420, 211, "wall2"),
-<<<<<<< HEAD
             new Platform(this, 585, 132, "S"), 
             // new MovingPlatform(this, 250, 150, "platform"),
-=======
             new Platform(this, 505, 132, "wall2b"),
             new Platform(this, 665, 132, "wall2b"),
             
@@ -137,7 +135,6 @@ export class Level1 extends Phaser.Scene {
             // new Platform(this, 500, 350, "ice"),
             // new Platform(this, 250, 450, "platform"),
             // new MovingPlatform(this, 100, 250, "platform"),
->>>>>>> 27a235d05d6fbc9d71d14c391a57eccc9c43301d
             
         ], true)
 
@@ -157,17 +154,13 @@ export class Level1 extends Phaser.Scene {
         // this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
-<<<<<<< HEAD
         this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
         
         
-=======
 
         this.add.image(400, 20, 'heart')
         this.add.image(360, 20, 'heart')
         this.add.image(440, 20, 'heart')
-
->>>>>>> 27a235d05d6fbc9d71d14c391a57eccc9c43301d
 
         this.physics.world.bounds.width = 770
         this.physics.world.bounds.height = 450
