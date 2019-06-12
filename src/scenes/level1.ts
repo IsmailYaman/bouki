@@ -4,7 +4,8 @@ import { Key } from "../objects/key"
 import { Door } from "../objects/door"
 import { Door1 } from "../objects/door1"
 import { MovingPlatform } from "../objects/movingplatform"
-import { Bomb } from "../objects/bomb"
+import { Enemy } from "../objects/enemy"
+// import { Bomb } from "../objects/bomb"
 import { Cameras } from "phaser";
 import { platform } from "os";
 import { Banana } from "../objects/banana";
@@ -14,11 +15,12 @@ export class Level1 extends Phaser.Scene {
     private player : Player
     private platforms: Phaser.GameObjects.Group
     private stars: Phaser.Physics.Arcade.Group
-    private bombs: Phaser.GameObjects.Group
+    // private bombs: Phaser.GameObjects.Group
     private key: Phaser.GameObjects.Group
     private door: Phaser.GameObjects.Group
     private door1: Phaser.GameObjects.Group
     private banana: Phaser.GameObjects.Group
+    private enemy: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
 
@@ -38,7 +40,33 @@ export class Level1 extends Phaser.Scene {
         })
         
 
-        this.add.image(0, 0, 'ground').setOrigin(0, 0)      
+        this.add.image(0, 0, 'ground').setOrigin(0, 0)  
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // this.enemy= new Enemy(this, 420, 56, "enemy")    
+        
+
+
+
+
+
+
+
+
+
+
+
         
         // 11 STARS
         this.stars = this.physics.add.group({
@@ -46,6 +74,9 @@ export class Level1 extends Phaser.Scene {
             repeat: 11,
             setXY: { x: 12, y: 60, stepX: 70 },
         })
+
+        this.enemy = this.add.group()
+        this.enemy.add(new Enemy(this, 420, 56), true)
 
         this.door = this.add.group()
         this.door.add(new Door(this, 240, 140), true)
@@ -59,9 +90,10 @@ export class Level1 extends Phaser.Scene {
         this.banana = this.add.group()
         this.banana.add(new Banana(this, 155, 200), true)
 
-        this.bombs = this.add.group()
-        this.bombs.add(new Bomb(this, 200, 390), true)
-        this.bombs.add(new Bomb(this, 150, 200), true)
+
+        // this.bombs = this.add.group()
+        // this.bombs.add(new Bomb(this, 400, 65), true)
+        // this.bombs.add(new Bomb(this, 150, 200), true)
 
         
 
@@ -70,6 +102,8 @@ export class Level1 extends Phaser.Scene {
 
         this.platforms = this.add.group({ runChildUpdate: true })
         
+        
+
         this.platforms.addMultiple([
             
             new Platform(this, 20, 225, "caveleft"),
@@ -85,28 +119,29 @@ export class Level1 extends Phaser.Scene {
             new Platform(this, 160, 140, "wall3"),
             new Platform(this, 220, 350, "wall4"),
             new Platform(this, 420, 211, "wall2"),
-            // new Platform(this, 460, 100, "wall2b"),
-            new Platform(this, 585, 132, "S"),
-            // new Platform(this, 500, 350, "ice"),
-            // new Platform(this, 250, 450, "platform"),
-            // new MovingPlatform(this, 100, 250, "platform"),
+            new Platform(this, 585, 132, "S"), 
+            // new MovingPlatform(this, 250, 150, "platform"),
             
         ], true)
+
+        
         this.add.text(710, 20, 'Level 1', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('black', 5)
         this.scoreField = this.add.text(150, 20, this.collectedBanana + ' Bananas collected', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.stars, this.platforms)
-        this.physics.add.collider(this.bombs, this.platforms)
-        this.physics.add.collider(this.bombs, this.door)
-        this.physics.add.collider(this.bombs, this.door1)
+        // this.physics.add.collider(this.bombs, this.platforms)
+        // this.physics.add.collider(this.bombs, this.door)
+        // this.physics.add.collider(this.bombs, this.door1)
         this.physics.add.collider(this.player, this.platforms)
         this.physics.add.collider(this.player, this.door)
         this.physics.add.collider(this.player, this.door1)
         
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
-        this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
+        // this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
+        this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
+        
         
 
         this.physics.world.bounds.width = 770
@@ -116,9 +151,15 @@ export class Level1 extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 0, 0)
     }
 
-    private hitBomb(player:Player, bomb){
-        this.bombs.remove(bomb, true, true)
-        console.log("ik ga DOOD")
+    // private hitBomb(player:Player, bomb){
+    //     this.bombs.remove(bomb, true, true)
+    //     console.log("ik ga DOOD")
+    //     this.scene.start('EndScene')
+    // }
+
+
+    private hitEnemy(player:Player, enemy){
+        console.log("Je bent dood")
         this.scene.start('EndScene')
     }
 

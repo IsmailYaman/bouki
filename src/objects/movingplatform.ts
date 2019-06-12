@@ -18,16 +18,18 @@ export class MovingPlatform extends Phaser.Physics.Arcade.Sprite {
         // friction 0 to 1 (ice has low friction) // no effect?
         // this.setFrictionX(friction)
 
-        this.startPosition = y
+        this.startPosition = x
     }
 
     public update(): void {
 
-        if (this.x>= this.startPosition + 3) {
+        if (this.x>= this.startPosition + 280) {
             this.setVelocityX(-50)
+            this.flipX = false
         }
         else if (this.x <= this.startPosition) {
             this.setVelocityX(50)
+            this.flipX = true
         }
     }
 }

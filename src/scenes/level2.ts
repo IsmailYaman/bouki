@@ -42,8 +42,8 @@ export class level2 extends Phaser.Scene {
         })
 
         this.bombs = this.add.group()
-        this.bombs.add(new Bomb(this, 200, 390), true)
-        this.bombs.add(new Bomb(this, 150, 200), true)
+        this.bombs.add(new Bomb(this, 700, 790), true)
+        this.bombs.add(new Bomb(this, 750, 700), true)
 
         // TODO add player
         this.player = new Player(this)
@@ -55,19 +55,16 @@ export class level2 extends Phaser.Scene {
             new Platform(this, 385, 20, "cavetop"),
             new Platform(this, 385, 430, "cavebot"),
             new Platform(this, 750, 225, "caveright"),
-            new Platform(this, 80, 130, "mazewall"),
-            new Platform(this, 80, 291, "mazewall1"),
-            new Platform(this, 665, 291, "wall"),
-            new Platform(this, 200, 258, "wall1"),
-            new Platform(this, 520, 232, "wall1"),
-            new Platform(this, 300, 159, "wall2"),
-            new Platform(this, 160, 140, "wall3"),
-            new Platform(this, 220, 350, "wall4"),
-            new Platform(this, 420, 211, "wall2"),
-            new Platform(this, 240, 140, "door"),
-            new Platform(this, 420, 370, "door1"),
-            new Platform(this, 585, 132, "S"),
-            new Platform(this, 200,200, "key"),
+            new Platform(this, 114, 141, "mazewall"),
+            new Platform(this, 312, 141, "mazewall"),
+            new Platform(this, 165, 241, "mazewall2"),
+            new Platform(this, 260, 204, "mazewall1"),
+            new Platform(this, 260, 104, "mazewall1"),
+            
+            
+            
+
+            // new Platform(this, 200,200, "key"),
             // new Platform(this, 500, 350, "ice"),
             // new Platform(this, 250, 450, "platform"),
             // new MovingPlatform(this, 100, 250, "platform"),

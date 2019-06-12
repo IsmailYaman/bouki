@@ -29,6 +29,8 @@ export class BootScene extends Phaser.Scene {
 
         this.load.image('mazewall', require('../assets/mazewall.png'))
         this.load.image('mazewall1', require('../assets/mazewall1.png'))
+        this.load.image('mazewall2', require('../assets/mazewall2.png'))
+        this.load.image('mazewall3', require('../assets/mazewall3.png'))
         // this.load.image('mazewall', require('../assets/mazewall.png'))
         // this.load.image('mazewall', require('../assets/mazewall.png'))
         // this.load.image('mazewall', require('../assets/mazewall.png'))
@@ -36,7 +38,8 @@ export class BootScene extends Phaser.Scene {
         this.load.image('bananaS', require('../assets/bananaS.png'))
         this.load.image('bananaL', require('../assets/bananaL.png'))
         this.load.image('key', require('../assets/key.png'))
-        this.load.image('bomb', require('../assets/bomb.png'))
+        // this.load.image('bomb', require('../assets/bomb.png'))
+        this.load.image('enemy', require('../assets/enemy.png'))
         this.load.image('water', require('../assets/water.png'))
         this.load.image('player', require('../assets/player.png'))
         this.load.image('ice', require('../assets/platform_ice.png'))
@@ -45,7 +48,7 @@ export class BootScene extends Phaser.Scene {
         this.load.on('complete', () => {
             console.log("everything is loaded")
             // add code here to switch to the start scene
-            this.scene.start("Level1")
+            this.scene.start("level2")
         })
     }
 }
