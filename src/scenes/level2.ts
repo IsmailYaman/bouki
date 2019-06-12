@@ -55,17 +55,25 @@ export class level2 extends Phaser.Scene {
             new Platform(this, 385, 20, "cavetop"),
             new Platform(this, 385, 430, "cavebot"),
             new Platform(this, 750, 225, "caveright"),
-            new Platform(this, 114, 141, "mazewall"),
+            new Platform(this, 558, 204, "mazewall1"),
+            new Platform(this, 510, 141, "mazewall"),
+            new Platform(this, 360, 300, "mazewall1"),
+            
+            new Platform(this, 212, 336, "mazewall"),  //lang rechts
+            new Platform(this, 457, 104, "mazewall1"),
+            new Platform(this, 120, 300, "mazewall1"),
+             
+            new Platform(this, 410, 240, "mazewall"),
+            new Platform(this, 360, 203, "mazewall1"), 
+            new Platform(this, 114, 141, "mazewall"), //kort rechts
             new Platform(this, 312, 141, "mazewall"),
-            new Platform(this, 165, 241, "mazewall2"),
+            
+            new Platform(this, 165, 241, "mazewall2"), //kort links
             new Platform(this, 260, 204, "mazewall1"),
-            new Platform(this, 260, 104, "mazewall1"),
+            new Platform(this, 260, 104, "mazewall1"), //recht beneden
             
-            
-            
-
-            new Platform(this, 80, 130, "mazewall"),
-            new Platform(this, 80, 291, "mazewall1"),
+            // new Platform(this, 80, 130, "mazewall"),
+   
             // new Platform(this, 665, 291, "wall"),
             // new Platform(this, 200, 258, "wall1"),
             // new Platform(this, 520, 232, "wall1"),
