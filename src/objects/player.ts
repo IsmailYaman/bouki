@@ -1,6 +1,8 @@
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
     private cursors: Phaser.Input.Keyboard.CursorKeys
+    public currentHealth = 100;
+    private maxHealth = 100;
 
     constructor(scene) {
         
@@ -40,6 +42,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
         if(this.cursors.down.isDown && this.cursors.left.isDown){
             this.flipX = true
+
         }
 
         if(this.cursors.up.isDown && this.cursors.left.isDown){
@@ -53,8 +56,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.flipX = false
         }
 
-
-
         if (this.cursors.down.isDown || this.cursors.up.isDown || this.cursors.right.isDown || this.cursors.left.isDown){
             console.log('Ik beweeg')
         }
@@ -65,6 +66,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         // if (this.cursors.up.isDown && grounded) {
         //     this.setVelocityY(-350)
         // }
+
+        //lives
+        
         
     }
 }
