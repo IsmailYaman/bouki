@@ -23,7 +23,7 @@ export class EndScene extends Phaser.Scene {
 
         // add code here to switch to the GameScene, after a mouse click
         this.input.once('pointerdown', (pointer) => {
-            this.scene.start('Level1')
+            this.scene.start('level1')
         })
     }
 }

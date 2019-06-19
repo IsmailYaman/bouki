@@ -53,7 +53,7 @@ export class BootScene extends Phaser.Scene {
             console.log("everything is loaded")
             // add code here to switch to the start scene
 
-            this.scene.start("level2")
+            this.scene.start("level1")
         })
     }
 }

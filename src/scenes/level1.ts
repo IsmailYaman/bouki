@@ -5,22 +5,24 @@ import { Door } from "../objects/door"
 import { Door1 } from "../objects/door1"
 import { MovingPlatform } from "../objects/movingplatform"
 import { Enemy } from "../objects/enemy"
-// import { Bomb } from "../objects/bomb"
+import { Enemy1 } from "../objects/enemy1"
 import { Cameras } from "phaser";
 import { platform } from "os";
 import { Banana } from "../objects/banana";
+import { Star } from "../objects/star";
 
-export class Level1 extends Phaser.Scene {
+export class level1 extends Phaser.Scene {
     
     private player : Player
     private platforms: Phaser.GameObjects.Group
-    private stars: Phaser.Physics.Arcade.Group
+    private stars: Phaser.GameObjects.Group
     // private bombs: Phaser.GameObjects.Group
     private key: Phaser.GameObjects.Group
     private door: Phaser.GameObjects.Group
     private door1: Phaser.GameObjects.Group
     private banana: Phaser.GameObjects.Group
     private enemy: Phaser.GameObjects.Group
+    private enemy1: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
     private graphics
@@ -28,7 +30,7 @@ export class Level1 extends Phaser.Scene {
 
 
     constructor() {
-        super({ key: "Level1" })
+        super({ key: "level1" })
     }
 
     init(): void {
@@ -47,41 +49,29 @@ export class Level1 extends Phaser.Scene {
 
         this.add.image(0, 0, 'ground').setOrigin(0, 0)  
 
+        this.stars = this.add.group()
+        this.stars.add(new Star(this, 60, 140), true)
+        this.stars.add(new Star(this, 60, 260), true)
+        this.stars.add(new Star(this, 140, 390), true)
+        this.stars.add(new Star(this, 220, 390), true)
+        this.stars.add(new Star(this, 300, 390), true)
+        this.stars.add(new Star(this, 625, 115), true)
+        this.stars.add(new Star(this, 545, 150), true)
+        this.stars.add(new Star(this, 710, 230), true)
+        this.stars.add(new Star(this, 710, 350), true)
 
+        this.enemy1 = this.add.group({runChildUpdate:true})
+        this.enemy1.add(new Enemy1(this, 420, 65), true)
+        this.enemy1.add(new Enemy1(this, 600, 195), true)
+        this.enemy1.add(new Enemy1(this, 50, 305), true)
+        this.enemy1.add(new Enemy1(this, 720, 390), true)
 
+        this.enemy = this.add.group({runChildUpdate:true})
+        this.enemy.add(new Enemy(this, 420, 65), true)
+        this.enemy.add(new Enemy(this, 600, 195), true)
+        this.enemy.add(new Enemy(this, 50, 305), true)
+        this.enemy.add(new Enemy(this, 720, 390), true)
 
-
-
-
-
-
-
-
-
-
-        // this.enemy= new Enemy(this, 420, 56, "enemy")    
-        
-
-
-
-
-
-
-
-
-
-
-
-        
-        // 11 STARS
-        this.stars = this.physics.add.group({
-            key: 'bananaS',
-            repeat: 11,
-            setXY: { x: 12, y: 60, stepX: 70 },
-        })
-
-        this.enemy = this.add.group()
-        this.enemy.add(new Enemy(this, 420, 56), true)
 
         this.door = this.add.group()
         this.door.add(new Door(this, 240, 140), true)
@@ -94,13 +84,6 @@ export class Level1 extends Phaser.Scene {
 
         this.banana = this.add.group()
         this.banana.add(new Banana(this, 155, 200), true)
-
-
-        // this.bombs = this.add.group()
-        // this.bombs.add(new Bomb(this, 400, 65), true)
-        // this.bombs.add(new Bomb(this, 150, 200), true)
-
-        
 
         // TODO add player
         this.player = new Player(this)
@@ -125,38 +108,32 @@ export class Level1 extends Phaser.Scene {
             new Platform(this, 565, 112, "wall3"),
             new Platform(this, 625, 152, "wall3b"),
             new Platform(this, 220, 350, "wall4"),
-            new Platform(this, 420, 211, "wall2"),
-            new Platform(this, 585, 132, "S"), 
-            // new MovingPlatform(this, 250, 150, "platform"),
+            new Platform(this, 420, 211, "wall2"), 
             new Platform(this, 505, 132, "wall2b"),
-            new Platform(this, 665, 132, "wall2b"),
-            
-            // new Platform(this, 585, 132, "S"),
-            // new Platform(this, 500, 350, "ice"),
-            // new Platform(this, 250, 450, "platform"),
-            // new MovingPlatform(this, 100, 250, "platform"),
+            new Platform(this, 665, 132, "wall2b")
             
         ], true)
 
         
         this.add.text(710, 20, 'Level 1', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('black', 5)
         this.scoreField = this.add.text(150, 20, this.collectedBanana + ' Bananas collected', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
+        
         // define collisions for bouncing, and overlaps for pickups
+        this.physics.add.collider(this.enemy, this.platforms)
+        this.physics.add.collider(this.enemy, this.door1)
+        this.physics.add.collider(this.enemy1, this.platforms)
+        this.physics.add.collider(this.enemy1, this.door1)
         this.physics.add.collider(this.stars, this.platforms)
-        // this.physics.add.collider(this.bombs, this.platforms)
-        // this.physics.add.collider(this.bombs, this.door)
-        // this.physics.add.collider(this.bombs, this.door1)
         this.physics.add.collider(this.player, this.platforms)
         this.physics.add.collider(this.player, this.door)
         this.physics.add.collider(this.player, this.door1)
         
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
-        // this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
         this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
-        
-        
+        this.physics.add.overlap(this.player, this.enemy1, this.hitEnemy, null, this)
+
 
         this.add.image(400, 20, 'heart')
         this.add.image(360, 20, 'heart')
@@ -168,13 +145,6 @@ export class Level1 extends Phaser.Scene {
         this.cameras.main.setSize(770, 450)
         this.cameras.main.setBounds(0, 0, 0, 0)
     }
-
-    // private hitBomb(player:Player, bomb){
-    //     this.bombs.remove(bomb, true, true)
-    //     console.log("ik ga DOOD")
-    //     this.scene.start('EndScene')
-    // }
-
 
     private hitEnemy(player:Player, enemy){
         console.log("Je bent dood")
@@ -219,7 +189,6 @@ export class Level1 extends Phaser.Scene {
             this.graphics.fillRectShape(new Phaser.Geom.Rectangle(400, 200, this.lives, 20))
             
         })
-        // this.add.text(170, 50,' Sterren', { fontFamily: 'Arial Black', fontSize: 40, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
     }
 
 }
