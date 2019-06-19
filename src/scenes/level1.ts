@@ -61,10 +61,7 @@ export class level1 extends Phaser.Scene {
         this.stars.add(new Star(this, 710, 350), true)
 
         this.enemy1 = this.add.group({runChildUpdate:true})
-        this.enemy1.add(new Enemy1(this, 420, 65), true)
-        this.enemy1.add(new Enemy1(this, 600, 195), true)
-        this.enemy1.add(new Enemy1(this, 50, 305), true)
-        this.enemy1.add(new Enemy1(this, 720, 390), true)
+        this.enemy1.add(new Enemy1(this, 710, 390), true)
 
         this.enemy = this.add.group({runChildUpdate:true})
         this.enemy.add(new Enemy(this, 420, 65), true)

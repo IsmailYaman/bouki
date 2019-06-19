@@ -1,11 +1,10 @@
 import { Player } from "../objects/player"
 import { Platform } from "../objects/platform"
 import { Key } from "../objects/key"
-import { Door } from "../objects/door"
 import { Door1 } from "../objects/door1"
-import { MovingPlatform } from "../objects/movingplatform"
 import { Enemy } from "../objects/enemy"
 import { Enemy1 } from "../objects/enemy1"
+import { Enemy2 } from "../objects/enemy2"
 import { Cameras } from "phaser";
 import { platform } from "os";
 import { Banana } from "../objects/banana";
@@ -50,33 +49,41 @@ export class level3 extends Phaser.Scene {
 
         this.stars = this.add.group()
         this.stars.add(new Star(this, 60, 140), true)
-        this.stars.add(new Star(this, 60, 260), true)
-        this.stars.add(new Star(this, 140, 390), true)
-        this.stars.add(new Star(this, 220, 390), true)
-        this.stars.add(new Star(this, 300, 390), true)
-        this.stars.add(new Star(this, 625, 115), true)
-        this.stars.add(new Star(this, 545, 150), true)
-        this.stars.add(new Star(this, 710, 230), true)
-        this.stars.add(new Star(this, 710, 350), true)
+        this.stars.add(new Star(this, 120, 220), true)
+        this.stars.add(new Star(this, 60, 310), true)
+        this.stars.add(new Star(this, 120, 390), true)
+        this.stars.add(new Star(this, 200, 65), true)
+        this.stars.add(new Star(this, 375, 65), true)
+        this.stars.add(new Star(this, 590, 65), true)
+        this.stars.add(new Star(this, 630, 230), true)
+        this.stars.add(new Star(this, 710, 310), true)
+        
 
         this.enemy = this.add.group({runChildUpdate:true})
-        this.enemy.add(new Enemy(this, 420, 65), true)
-        this.enemy.add(new Enemy(this, 600, 195), true)
-        this.enemy.add(new Enemy(this, 50, 305), true)
-        this.enemy.add(new Enemy(this, 720, 390), true)
+        this.enemy.add(new Enemy2(this, 210, 395), true)
+        this.enemy.add(new Enemy1(this, 265, 60), true)
+        this.enemy.add(new Enemy2(this, 320, 395), true)
+        this.enemy.add(new Enemy1(this, 375, 60), true)
+        this.enemy.add(new Enemy2(this, 430, 395), true)
+        this.enemy.add(new Enemy1(this, 485, 60), true)
+        this.enemy.add(new Enemy2(this, 540, 395), true)
+        this.enemy.add(new Enemy(this, 561, 220), true)
+        this.enemy.add(new Enemy(this, 200, 100), true)
+        this.enemy.add(new Enemy(this, 60, 180), true)
 
 
-        this.door = this.add.group()
-        this.door.add(new Door(this, 240, 140), true)
+
+        // this.door = this.add.group()
+        // this.door.add(new Door(this, 440, 140), true)
 
         this.door1 = this.add.group()
-        this.door1.add(new Door1(this, 420, 370), true)
+        this.door1.add(new Door1(this, 590, 370), true)
 
         this.key = this.add.group()
-        this.key.add(new Key(this, 480, 300), true)
+        this.key.add(new Key(this, 680, 65), true)
 
         this.banana = this.add.group()
-        this.banana.add(new Banana(this, 155, 200), true)
+        this.banana.add(new Banana(this, 690, 170), true)
 
         // TODO add player
         this.player = new Player(this)
@@ -86,24 +93,20 @@ export class level3 extends Phaser.Scene {
         
 
         this.platforms.addMultiple([
-            
+            new Platform(this, 710, 230, "wall3b"),
+            new Platform(this, 40, 140, "wall3"),
+            new Platform(this, 140, 339, "wall3"),
+            new Platform(this, 160, 318, "wall2b"),
+            new Platform(this, 40, 220, "wall3"),
             new Platform(this, 20, 225, "caveleft"),
             new Platform(this, 385, 20, "cavetop"),
             new Platform(this, 385, 430, "cavebot"),
             new Platform(this, 750, 225, "caveright"),
-            new Platform(this, 100, 199, "wall"),
-            new Platform(this, 540, 291, "wall"),
-            new Platform(this, 665, 291, "wall"),
-            new Platform(this, 200, 258, "wall1"),
-            new Platform(this, 520, 232, "wall1"),
-            new Platform(this, 300, 159, "wall2"),
-            new Platform(this, 160, 140, "wall3"),
-            new Platform(this, 565, 112, "wall3"),
-            new Platform(this, 625, 152, "wall3b"),
-            new Platform(this, 220, 350, "wall4"),
-            new Platform(this, 420, 211, "wall2"), 
-            new Platform(this, 505, 132, "wall2b"),
-            new Platform(this, 665, 132, "wall2b")
+            new Platform(this, 670, 112, "wall3b"),
+            new Platform(this, 630, 310, "wall3b"),
+            new Platform(this, 160, 159, "wall2"), 
+            // new Platform(this, 590, 199, "wall2"),
+            new Platform(this, 590, 211, "wall2"),
             
         ], true)
 
@@ -143,14 +146,14 @@ export class level3 extends Phaser.Scene {
     private hitBanana(player:Player, banana){
         this.banana.remove(banana, true, true)
         console.log("Volgend level")
-        this.scene.start('level2')
+        this.scene.start('EndScene')
     }
 
     private hitKey(player:Player, key){
         console.log(key);
         
         this.key.remove(key, true, true)
-        this.door.remove(this.door.children.entries[0], true, true)
+
         this.door1.remove(this.door1.children.entries[0], true, true)
         console.log("Deur is open!")
     1   
