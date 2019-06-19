@@ -161,7 +161,7 @@ export class level1 extends Phaser.Scene {
         this.door.remove(this.door.children.entries[0], true, true)
         this.door1.remove(this.door1.children.entries[0], true, true)
         console.log("Deur is open!")
-    1   
+
     }
 
     private collectStar(player : Player , star) : void {

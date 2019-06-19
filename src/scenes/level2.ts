@@ -1,8 +1,9 @@
 import { Player } from "../objects/player"
 import { Platform } from "../objects/platform"
-import { Door } from "../objects/door"
-import { MovingPlatform } from "../objects/movingplatform"
+import { Key } from "../objects/key"
+import { Mazedoor } from "../objects/mazedoor"
 import { Bomb } from "../objects/bomb"
+import { Banana } from "../objects/banana";
 import { Cameras } from "phaser";
 import { platform } from "os";
 
@@ -10,9 +11,11 @@ export class level2 extends Phaser.Scene {
     
     private player : Player
     private platforms: Phaser.GameObjects.Group
+    private key: Phaser.GameObjects.Group
+    private mazedoor: Phaser.GameObjects.Group
     private stars: Phaser.Physics.Arcade.Group
     private bombs: Phaser.GameObjects.Group
-    private water: Phaser.GameObjects.Group
+    private banana: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
 
@@ -45,6 +48,17 @@ export class level2 extends Phaser.Scene {
         this.bombs.add(new Bomb(this, 700, 790), true)
         this.bombs.add(new Bomb(this, 750, 700), true)
 
+        this.key = this.add.group()
+        this.key.add(new Key(this, 320, 86), true)
+        
+        this.mazedoor = this.add.group()
+        this.mazedoor.add(new Mazedoor(this, 663, 190), true)
+
+        this.banana = this.add.group()
+        this.banana.add(new Banana(this, 530, 85), true)
+        
+        
+
         // TODO add player
         this.player = new Player(this)
 
@@ -54,9 +68,16 @@ export class level2 extends Phaser.Scene {
             new Platform(this, 20, 225, "caveleft"),
             new Platform(this, 385, 20, "cavetop"),
             new Platform(this, 385, 430, "cavebot"),
+            new Platform(this, 664, 300, "mazewall1"),
+            new Platform(this, 710, 240, "mazewall2"),
+            new Platform(this, 615, 140, "mazewall"),
             new Platform(this, 750, 225, "caveright"),
             new Platform(this, 558, 204, "mazewall1"),
             new Platform(this, 510, 141, "mazewall"),
+            // new Platform(this, 662, 186, "mazewall3"),
+            
+
+
             new Platform(this, 360, 300, "mazewall1"),
             
             new Platform(this, 212, 336, "mazewall"),  //lang rechts
@@ -71,6 +92,11 @@ export class level2 extends Phaser.Scene {
             new Platform(this, 165, 241, "mazewall2"), //kort links
             new Platform(this, 260, 204, "mazewall1"),
             new Platform(this, 260, 104, "mazewall1"), //recht beneden
+
+            new Platform(this, 507, 339, "mazewall2"),
+            new Platform(this, 615, 339, "mazewall"),
+
+
             
             // new Platform(this, 80, 130, "mazewall"),
    
@@ -95,10 +121,13 @@ export class level2 extends Phaser.Scene {
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.stars, this.platforms)
         this.physics.add.collider(this.bombs, this.platforms)
+        this.physics. add.collider(this.player, this.mazedoor)
         this.physics.add.collider(this.player, this.platforms)
         
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
         this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
+        this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
+        this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
 
         this.physics.world.bounds.width = 770
         this.physics.world.bounds.height = 450
@@ -122,6 +151,20 @@ export class level2 extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene'
         this.scoreField.text = this.collectedBanana + ' Bananas collected'
     
+    }
+    private hitKey(player:Player, key){
+        console.log(key);
+        
+        this.key.remove(key, true, true)
+        this.mazedoor.remove(this.mazedoor.children.entries[0], true)
+        console.log("Deur is open!")
+    }
+
+    
+    private hitBanana(player:Player, banana){
+        this.banana.remove(banana, true)
+        console.log("Volgend level")
+        this.scene.start('level1')
     }
 
     update(){
