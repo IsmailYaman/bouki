@@ -30,7 +30,7 @@ export class level2 extends Phaser.Scene {
 
     create(): void {
         this.input.once('pointerdown', (pointer) => {
-            this.scene.start('EndScene')
+            this.scene.start('level3')
             console.log('volgend level')
         })
 
