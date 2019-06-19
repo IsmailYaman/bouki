@@ -121,7 +121,7 @@ export class level2 extends Phaser.Scene {
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.stars, this.platforms)
         this.physics.add.collider(this.bombs, this.platforms)
-        this.physics.add.collider(this.player, this.mazedoor)
+        this.physics. add.collider(this.player, this.mazedoor)
         this.physics.add.collider(this.player, this.platforms)
         
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
