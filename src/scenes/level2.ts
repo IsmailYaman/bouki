@@ -164,7 +164,7 @@ export class level2 extends Phaser.Scene {
     private hitBanana(player:Player, banana){
         this.banana.remove(banana, true)
         console.log("Volgend level")
-        this.scene.start('level1')
+        this.scene.start('level3')
     }
 
     update(){

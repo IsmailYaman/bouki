@@ -70,6 +70,7 @@ export class level3 extends Phaser.Scene {
         this.enemy.add(new Enemy(this, 561, 220), true)
         this.enemy.add(new Enemy(this, 200, 100), true)
         this.enemy.add(new Enemy(this, 60, 180), true)
+        this.enemy.add(new Enemy(this, 200, 310), true)
 
 
 
