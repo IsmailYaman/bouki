@@ -47,32 +47,8 @@ export class Level1 extends Phaser.Scene {
 
         this.add.image(0, 0, 'ground').setOrigin(0, 0)  
 
-
-
-
-
-
-
-
-
-
-
-
-
         // this.enemy= new Enemy(this, 420, 56, "enemy")    
-        
 
-
-
-
-
-
-
-
-
-
-
-        
         // 11 STARS
         this.stars = this.physics.add.group({
             key: 'bananaS',
@@ -194,7 +170,7 @@ export class Level1 extends Phaser.Scene {
         this.door.remove(this.door.children.entries[0], true, true)
         this.door1.remove(this.door1.children.entries[0], true, true)
         console.log("Deur is open!")
-    1   
+
     }
 
     private collectStar(player : Player , star) : void {

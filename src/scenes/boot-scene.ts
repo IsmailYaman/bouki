@@ -34,10 +34,8 @@ export class BootScene extends Phaser.Scene {
         this.load.image('mazewall1', require('../assets/mazewall1.png'))
         this.load.image('mazewall2', require('../assets/mazewall2.png'))
         this.load.image('mazewall3', require('../assets/mazewall3.png'))
-        // this.load.image('mazewall', require('../assets/mazewall.png'))
-        // this.load.image('mazewall', require('../assets/mazewall.png'))
-        // this.load.image('mazewall', require('../assets/mazewall.png'))
-        // this.load.image('mazewall', require('../assets/mazewall.png'))
+
+        this.load.image('mazedoor', require('../assets/mazedoor.png'))
 
         this.load.image('bananaS', require('../assets/bananaS.png'))
         this.load.image('bananaL', require('../assets/bananaL.png'))
