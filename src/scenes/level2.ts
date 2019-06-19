@@ -97,23 +97,6 @@ export class level2 extends Phaser.Scene {
             new Platform(this, 615, 339, "mazewall"),
 
 
-            
-            // new Platform(this, 80, 130, "mazewall"),
-   
-            // new Platform(this, 665, 291, "wall"),
-            // new Platform(this, 200, 258, "wall1"),
-            // new Platform(this, 520, 232, "wall1"),
-            // new Platform(this, 300, 159, "wall2"),
-            // new Platform(this, 160, 140, "wall3"),
-            // new Platform(this, 220, 350, "wall4"),
-            // new Platform(this, 420, 211, "wall2"),
-            // new Platform(this, 240, 140, "door"),
-            // new Platform(this, 420, 370, "door1"),
-            // new Platform(this, 585, 132, "S"),
-            // new Platform(this, 200,200, "key"),
-            // new Platform(this, 500, 350, "ice"),
-            // new Platform(this, 250, 450, "platform"),
-            // new MovingPlatform(this, 100, 250, "platform"),
         ], true)
         
         this.add.text(710, 20, 'Level 2', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('black', 5)
