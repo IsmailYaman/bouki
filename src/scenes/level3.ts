@@ -37,8 +37,8 @@ export class level3 extends Phaser.Scene {
     }
     create(): void {
         this.input.once('pointerdown', (pointer) => {
-            this.scene.start('EndScene')
-            console.log('volgend level')
+            this.scene.start('WinScene')
+            console.log('Je hebt gewonnen!')
 
             this.graphics = this.add.graphics({ fillStyle: { color: 0x00AA00 } })
             
@@ -94,6 +94,10 @@ export class level3 extends Phaser.Scene {
         
 
         this.platforms.addMultiple([
+            new Platform(this, 20, 20,"topleft"),
+            new Platform(this, 750, 20,"topright"),
+            new Platform(this, 20, 430,"bottomleft"),
+            new Platform(this, 750, 430,"bottomright"),
             new Platform(this, 710, 230, "wall3b"),
             new Platform(this, 40, 140, "wall3"),
             new Platform(this, 140, 339, "wall3"),

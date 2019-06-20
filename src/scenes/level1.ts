@@ -90,7 +90,10 @@ export class level1 extends Phaser.Scene {
         
 
         this.platforms.addMultiple([
-            
+            new Platform(this, 20, 20,"topleft"),
+            new Platform(this, 750, 20,"topright"),
+            new Platform(this, 20, 430,"bottomleft"),
+            new Platform(this, 750, 430,"bottomright"),
             new Platform(this, 20, 225, "caveleft"),
             new Platform(this, 385, 20, "cavetop"),
             new Platform(this, 385, 430, "cavebot"),
