@@ -5,6 +5,7 @@ import { level1 } from "./scenes/level1"
 import { level2} from "./scenes/level2"
 import { level3} from "./scenes/level3"
 import { EndScene } from "./scenes/end-scene"
+import { WinScene } from "./scenes/win-scene"
 
 
 const config: GameConfig = {
@@ -12,7 +13,7 @@ const config: GameConfig = {
     height: 450,
     parent: "game",
     resolution: window.devicePixelRatio,
-    scene: [BootScene, StartScene, level1, level2, level3, EndScene ],
+    scene: [BootScene, StartScene, level1, level2, level3, EndScene, WinScene],
     input: {
         keyboard: true
     },

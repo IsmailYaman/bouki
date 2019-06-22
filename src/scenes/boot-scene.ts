@@ -10,7 +10,7 @@ export class BootScene extends Phaser.Scene {
     }
 
     preload(): void {
-        this.load.image('sky', require('../assets/background.png'))
+        this.load.image('jungle', require('../assets/background.png'))
         this.load.image('start', require('../assets/Start.png'))
         this.load.image('ground', require('../assets/ground.png'))
         this.load.image('wall', require('../assets/wall.png'))
@@ -18,6 +18,11 @@ export class BootScene extends Phaser.Scene {
         this.load.image('cavetop', require('../assets/cavetop.png'))
         this.load.image('cavebot', require('../assets/cavebot.png'))
         this.load.image('caveright', require('../assets/caveright.png'))
+
+        this.load.image('topleft', require('../assets/topleft.png'))
+        this.load.image('topright', require('../assets/topright.png'))
+        this.load.image('bottomleft', require('../assets/bottomleft.png'))
+        this.load.image('bottomright', require('../assets/bottomright.png'))   
         this.load.image('wall', require('../assets/wall.png'))
         this.load.image('wall1', require('../assets/wall1.png'))
         this.load.image('wall2', require('../assets/wall2.png'))
@@ -51,7 +56,7 @@ export class BootScene extends Phaser.Scene {
             console.log("everything is loaded")
             // add code here to switch to the start scene
 
-            this.scene.start("level3")
+            this.scene.start("WinScene")
         })
     }
 }
