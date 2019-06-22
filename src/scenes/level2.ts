@@ -2,8 +2,9 @@ import { Player } from "../objects/player"
 import { Platform } from "../objects/platform"
 import { Key } from "../objects/key"
 import { Mazedoor } from "../objects/mazedoor"
-import { Bomb } from "../objects/bomb"
 import { Banana } from "../objects/banana";
+
+import { Star } from "../objects/star";
 import { Cameras } from "phaser";
 import { platform } from "os";
 
@@ -36,17 +37,18 @@ export class level2 extends Phaser.Scene {
 
 
         this.add.image(0, 0, 'ground').setOrigin(0, 0)      
-        
-        // 11 STARS
-        this.stars = this.physics.add.group({
-            key: 'star',
-            repeat: 11,
-            setXY: { x: 12, y: 60, stepX: 70 },
-        })
 
-        this.bombs = this.add.group()
-        this.bombs.add(new Bomb(this, 700, 790), true)
-        this.bombs.add(new Bomb(this, 750, 700), true)
+        this.stars = this.add.group()
+        this.stars.add(new Star(this, 60, 140), true)
+        this.stars.add(new Star(this, 60, 260), true)
+        this.stars.add(new Star(this, 140, 390), true)
+        this.stars.add(new Star(this, 220, 390), true)
+        this.stars.add(new Star(this, 300, 390), true)
+        this.stars.add(new Star(this, 625, 115), true)
+        this.stars.add(new Star(this, 545, 150), true)
+        this.stars.add(new Star(this, 710, 230), true)
+        this.stars.add(new Star(this, 710, 350), true)
+
 
         this.key = this.add.group()
         this.key.add(new Key(this, 320, 86), true)
@@ -103,12 +105,10 @@ export class level2 extends Phaser.Scene {
         this.scoreField = this.add.text(150, 20, this.collectedBanana + ' Bananas collected', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.stars, this.platforms)
-        this.physics.add.collider(this.bombs, this.platforms)
         this.physics. add.collider(this.player, this.mazedoor)
         this.physics.add.collider(this.player, this.platforms)
         
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
-        this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
 
@@ -119,12 +119,6 @@ export class level2 extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 0, 0)
     }
 
-    private hitBomb(player:Player, bomb){
-        this.bombs.remove(bomb, true, true)
-        console.log("ik ga DOOD")
-        this.scene.start('EndScene')
-    }
-
     private collectStar(player : Player , star) : void {
         this.stars.remove(star, true, true)
         this.registry.values.score++
@@ -133,6 +127,7 @@ export class level2 extends Phaser.Scene {
 
         // TO DO check if we have all the stars, then go to the end scene'
         this.scoreField.text = this.collectedBanana + ' Bananas collected'
+        
     
     }
     private hitKey(player:Player, key){
@@ -143,6 +138,7 @@ export class level2 extends Phaser.Scene {
         console.log("Deur is open!")
     }
 
+    
     
     private hitBanana(player:Player, banana){
         this.banana.remove(banana, true)

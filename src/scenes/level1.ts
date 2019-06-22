@@ -3,7 +3,6 @@ import { Platform } from "../objects/platform"
 import { Key } from "../objects/key"
 import { Door } from "../objects/door"
 import { Door1 } from "../objects/door1"
-import { MovingPlatform } from "../objects/movingplatform"
 import { Enemy } from "../objects/enemy"
 import { Enemy1 } from "../objects/enemy1"
 import { Cameras } from "phaser";
@@ -16,7 +15,6 @@ export class level1 extends Phaser.Scene {
     private player : Player
     private platforms: Phaser.GameObjects.Group
     private stars: Phaser.GameObjects.Group
-    // private bombs: Phaser.GameObjects.Group
     private key: Phaser.GameObjects.Group
     private door: Phaser.GameObjects.Group
     private door1: Phaser.GameObjects.Group
