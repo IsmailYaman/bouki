@@ -175,6 +175,7 @@ export class level2 extends Phaser.Scene {
 
         // TO DO check if we have all the stars, then go to the end scene'
         this.scoreField.text = this.collectedBanana + ' Bananas collected'
+        
     
     }
     private hitKey(player:Player, key){
@@ -189,6 +190,7 @@ export class level2 extends Phaser.Scene {
         console.log("Je bent dood")
         this.scene.start('EndScene')
     }
+    
     
     private hitBanana(player:Player, banana){
         this.banana.remove(banana, true)
