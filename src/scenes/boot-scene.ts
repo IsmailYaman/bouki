@@ -47,16 +47,15 @@ export class BootScene extends Phaser.Scene {
         this.load.image('key', require('../assets/key.png'))
         // this.load.image('bomb', require('../assets/bomb.png'))
         this.load.image('enemy', require('../assets/enemy.png'))
-        this.load.image('water', require('../assets/water.png'))
+        this.load.image('enemyred', require('../assets/enemyred.png'))
+        this.load.image('shade', require('../assets/shade.png'))
         this.load.image('player', require('../assets/player.png'))
-        this.load.image('ice', require('../assets/platform_ice.png'))
-        this.load.image('platform', require('../assets/platform_grass.png'))
 
         this.load.on('complete', () => {
             console.log("everything is loaded")
             // add code here to switch to the start scene
 
-            this.scene.start("WinScene")
+            this.scene.start("StartScene")
         })
     }
 }
