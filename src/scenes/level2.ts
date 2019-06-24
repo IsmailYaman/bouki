@@ -130,18 +130,7 @@ export class level2 extends Phaser.Scene {
 
         ], true)
         
-        this.add.image(0, 0, 'shade').setOrigin(0, 0)
-
-
-
-
-
-
-
-
-
-
-
+        // this.add.image(0, 0, 'shade').setOrigin(0, 0)
 
 
         this.add.text(710, 20, 'Level 2', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('black', 5)

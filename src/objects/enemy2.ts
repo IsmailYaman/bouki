@@ -15,5 +15,5 @@ export class Enemy2 extends Phaser.Physics.Arcade.Sprite {
 
         
         this.setVelocity(0, -100);
-
+        console.log("enemy 2 is geladen")
     }}

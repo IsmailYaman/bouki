@@ -31,11 +31,13 @@ var MovingPlatform = /** @class */ (function (_super) {
         return _this;
     }
     MovingPlatform.prototype.update = function () {
-        if (this.x >= this.startPosition + 150) {
+        if (this.x >= this.startPosition + 280) {
             this.setVelocityX(-50);
+            this.flipX = false;
         }
         else if (this.x <= this.startPosition) {
             this.setVelocityX(50);
+            this.flipX = true;
         }
     };
     return MovingPlatform;

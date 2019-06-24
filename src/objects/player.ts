@@ -58,6 +58,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.cursors.down.isDown || this.cursors.up.isDown || this.cursors.right.isDown || this.cursors.left.isDown){
             console.log('Ik beweeg')
         }
+        console.log(this.maxHealth, this.currentHealth)
 
         // Jumping
         
