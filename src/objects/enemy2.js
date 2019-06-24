@@ -18,6 +18,7 @@ var Enemy2 = /** @class */ (function (_super) {
     function Enemy2(scene, x, y, friction) {
         if (friction === void 0) { friction = 1; }
         var _this = _super.call(this, scene, x, y, "enemy") || this;
+        _this.damage = 34;
         _this.scene.physics.add.existing(_this);
         var body = _this.body;
         _this.setGravity(0);

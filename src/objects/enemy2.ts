@@ -1,6 +1,8 @@
+import { Player } from "../objects/player"
 export class Enemy2 extends Phaser.Physics.Arcade.Sprite {
 
     private startPosition:number
+    private damage = 34
 
     constructor(scene, x: number, y: number, friction:number = 1) {
         super(scene, x, y, "enemy")
@@ -16,4 +18,5 @@ export class Enemy2 extends Phaser.Physics.Arcade.Sprite {
         
         this.setVelocity(0, -100);
         console.log("enemy 2 is geladen")
+ 
     }}
