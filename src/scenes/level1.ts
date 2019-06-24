@@ -3,26 +3,26 @@ import { Platform } from "../objects/platform"
 import { Key } from "../objects/key"
 import { Door } from "../objects/door"
 import { Door1 } from "../objects/door1"
+import { MovingPlatform } from "../objects/movingplatform"
 import { Enemy } from "../objects/enemy"
 import { Enemy1 } from "../objects/enemy1"
-import { EnemyRed } from "../objects/enemyred";
-
+import { Cameras } from "phaser";
+import { platform } from "os";
 import { Banana } from "../objects/banana";
 import { Star } from "../objects/star";
-
 
 export class level1 extends Phaser.Scene {
     
     private player : Player
     private platforms: Phaser.GameObjects.Group
     private stars: Phaser.GameObjects.Group
+    // private bombs: Phaser.GameObjects.Group
     private key: Phaser.GameObjects.Group
     private door: Phaser.GameObjects.Group
     private door1: Phaser.GameObjects.Group
     private banana: Phaser.GameObjects.Group
     private enemy: Phaser.GameObjects.Group
     private enemy1: Phaser.GameObjects.Group
-    private enemy3: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
     private graphics
@@ -67,9 +67,7 @@ export class level1 extends Phaser.Scene {
         this.enemy.add(new Enemy(this, 420, 65), true)
         this.enemy.add(new Enemy(this, 600, 195), true)
         this.enemy.add(new Enemy(this, 50, 305), true)
-
-        this.enemy3 = this.add.group({runChildUpdate:true})
-        this.enemy3.add(new EnemyRed(this, 710, 390), true)
+        this.enemy.add(new Enemy(this, 720, 390), true)
 
 
         this.door = this.add.group()
@@ -125,8 +123,6 @@ export class level1 extends Phaser.Scene {
         this.physics.add.collider(this.enemy, this.door1)
         this.physics.add.collider(this.enemy1, this.platforms)
         this.physics.add.collider(this.enemy1, this.door1)
-        this.physics.add.collider(this.enemy3, this.platforms)
-        this.physics.add.collider(this.enemy3, this.door1)
         this.physics.add.collider(this.stars, this.platforms)
         this.physics.add.collider(this.player, this.platforms)
         this.physics.add.collider(this.player, this.door)
@@ -137,7 +133,6 @@ export class level1 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
         this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
         this.physics.add.overlap(this.player, this.enemy1, this.hitEnemy, null, this)
-        this.physics.add.overlap(this.player, this.enemy3, this.hitEnemy, null, this)
 
 
         this.add.image(400, 20, 'heart')
@@ -180,6 +175,8 @@ export class level1 extends Phaser.Scene {
 
         // TO DO check if we have all the stars, then go to the end scene'
         this.scoreField.text = this.collectedBanana + ' Bananas collected'
+        
+    
     }
 
     update(){

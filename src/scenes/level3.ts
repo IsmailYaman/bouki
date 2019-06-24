@@ -5,7 +5,8 @@ import { Door1 } from "../objects/door1"
 import { Enemy } from "../objects/enemy"
 import { Enemy1 } from "../objects/enemy1"
 import { Enemy2 } from "../objects/enemy2"
-import { EnemyRed } from "../objects/enemyred";
+import { Cameras } from "phaser";
+import { platform } from "os";
 import { Banana } from "../objects/banana";
 import { Star } from "../objects/star";
 
@@ -14,6 +15,7 @@ export class level3 extends Phaser.Scene {
     private player : Player
     private platforms: Phaser.GameObjects.Group
     private stars: Phaser.GameObjects.Group
+    // private bombs: Phaser.GameObjects.Group
     private key: Phaser.GameObjects.Group
     private door: Phaser.GameObjects.Group
     private door1: Phaser.GameObjects.Group
@@ -65,10 +67,10 @@ export class level3 extends Phaser.Scene {
         this.enemy.add(new Enemy2(this, 430, 395), true)
         this.enemy.add(new Enemy1(this, 485, 60), true)
         this.enemy.add(new Enemy2(this, 540, 395), true)
-        this.enemy.add(new EnemyRed(this, 561, 220), true)
-        this.enemy.add(new EnemyRed(this, 200, 100), true)
+        this.enemy.add(new Enemy(this, 561, 220), true)
+        this.enemy.add(new Enemy(this, 200, 100), true)
         this.enemy.add(new Enemy(this, 60, 180), true)
-        this.enemy.add(new EnemyRed(this, 200, 310), true)
+        this.enemy.add(new Enemy(this, 200, 310), true)
 
 
 
@@ -130,7 +132,6 @@ export class level3 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
         this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
 
-
         this.add.image(400, 20, 'heart')
         this.add.image(360, 20, 'heart')
         this.add.image(440, 20, 'heart')
@@ -149,8 +150,8 @@ export class level3 extends Phaser.Scene {
 
     private hitBanana(player:Player, banana){
         this.banana.remove(banana, true, true)
-        console.log("Je hebt gewonnen!")
-        this.scene.start('WinScene')
+        console.log("Volgend level")
+        this.scene.start('EndScene')
     }
 
     private hitKey(player:Player, key){
