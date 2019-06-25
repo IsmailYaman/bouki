@@ -14,7 +14,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.scene.physics.add.existing(this)
 
         this.setCollideWorldBounds(true)
-        // this.setBounce(0.1)
         this.setDragX(1000)
         this.setDragY(1000)
     }
@@ -59,7 +58,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.cursors.down.isDown || this.cursors.up.isDown || this.cursors.right.isDown || this.cursors.left.isDown){
             console.log('Ik beweeg')
         }
-        console.log(this.maxHealth, this.currentHealth)
 
         // Jumping
         

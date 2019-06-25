@@ -16,17 +16,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("phaser");
 var boot_scene_1 = require("./scenes/boot-scene");
 var start_scene_1 = require("./scenes/start-scene");
-var level1_1 = require("./scenes/level1");
-var level2_1 = require("./scenes/level2");
-var level3_1 = require("./scenes/level3");
+var game_scene_1 = require("./scenes/game-scene");
 var end_scene_1 = require("./scenes/end-scene");
-var win_scene_1 = require("./scenes/win-scene");
 var config = {
     width: 770,
     height: 450,
     parent: "game",
     resolution: window.devicePixelRatio,
-    scene: [boot_scene_1.BootScene, start_scene_1.StartScene, level1_1.level1, level2_1.level2, level3_1.level3, end_scene_1.EndScene, win_scene_1.WinScene],
+    scene: [boot_scene_1.BootScene, start_scene_1.StartScene, game_scene_1.GameScene, end_scene_1.EndScene],
     input: {
         keyboard: true
     },

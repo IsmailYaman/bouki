@@ -16,15 +16,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Player = /** @class */ (function (_super) {
     __extends(Player, _super);
     function Player(scene) {
-        var _this = _super.call(this, scene, 100, 80, "player") || this;
-        _this.currentHealth = 100;
-        _this.maxHealth = 100;
+        var _this = _super.call(this, scene, 100, 300, "player") || this;
         _this.cursors = _this.scene.input.keyboard.createCursorKeys();
         _this.scene.add.existing(_this);
         _this.scene.physics.add.existing(_this);
         _this.setCollideWorldBounds(true);
-        _this.setDragX(1000);
-        _this.setDragY(1000);
+        // this.setBounce(0.1)
+        _this.setDragX(600);
+        _this.setDragY(600);
         return _this;
     }
     Player.prototype.update = function () {
@@ -32,38 +31,23 @@ var Player = /** @class */ (function (_super) {
             this.setVelocityX(-200);
             this.flipX = true;
         }
-        if (this.cursors.right.isDown) {
+        else if (this.cursors.right.isDown) {
             this.setVelocityX(200);
             this.flipX = false;
         }
-        if (this.cursors.up.isDown) {
+        else if (this.cursors.up.isDown) {
             this.setVelocityY(-200);
+            this.flipX = false;
         }
-        if (this.cursors.down.isDown) {
+        else if (this.cursors.down.isDown) {
             this.setVelocityY(200);
-        }
-        if (this.cursors.down.isDown && this.cursors.left.isDown) {
-            this.flipX = true;
-        }
-        if (this.cursors.up.isDown && this.cursors.left.isDown) {
-            this.flipX = true;
-        }
-        if (this.cursors.down.isDown && this.cursors.right.isDown) {
             this.flipX = false;
         }
-        if (this.cursors.up.isDown && this.cursors.right.isDown) {
-            this.flipX = false;
-        }
-        if (this.cursors.down.isDown || this.cursors.up.isDown || this.cursors.right.isDown || this.cursors.left.isDown) {
-            console.log('Ik beweeg');
-        }
-        console.log(this.maxHealth, this.currentHealth);
-        // Jumping
+        // jump when the body is touching the floor
         // let grounded = this.body.touching.down 
         // if (this.cursors.up.isDown && grounded) {
         //     this.setVelocityY(-350)
         // }
-        //lives
     };
     return Player;
 }(Phaser.Physics.Arcade.Sprite));
