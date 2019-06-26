@@ -1,9 +1,9 @@
-import { Joystick } from "./joystick";
-
-export class Arcade{
+class Arcade{
     private readonly DEBUG          : boolean = true;
     private joysticks               : Joystick[]
+    private readonly REDIRECT_URL   : string = "http://hr-cmgt.github.io/arcade-server"
     private multiplayer             : boolean = false
+    private game                    : Game
     // PROPERTIES
     public get Joysticks()          : Joystick[] { return this.joysticks }
 
@@ -11,16 +11,25 @@ export class Arcade{
      * Creates an arcade 'cabinet' 
      * @param mp 'true' for 2 joystick multiplayer Arcade (default single player)
      */
-    constructor(mp:boolean = false) {
+    constructor(game: Game, mp:boolean = false) {
+        this.game        = game
         this.multiplayer = mp
         this.joysticks   = []
     
         if(this.DEBUG) this.showStatus("Gamepad is NOT connected. Press a button to connect")
 
+        document.addEventListener("redirect", () => this.onRedirect())
         window.addEventListener("gamepadconnected",     (e: Event) => this.onGamePadConnected(e as GamepadEvent))
         window.addEventListener("gamepaddisconnected",  (e: Event) => this.onGamePadDisconnected(e as GamepadEvent))
     }
 
+    /**
+     * Handles redirect fired from joystick
+     */
+    private onRedirect(): void {
+        if (this.DEBUG) { console.log('redirect!!') }
+        window.location.href = this.REDIRECT_URL
+    }
 
     /**
      * Handles connecting a joystick
@@ -52,7 +61,7 @@ export class Arcade{
         if(this.DEBUG) { console.log('Game pad disconnected') }
         if(this.DEBUG) this.showStatus("Gamepad is NOT connected. Connect the gamepad and press a button.")
         this.removeJoystick(e.gamepad.index)
-       
+        this.game.disconnect()
     }
 
     /**
@@ -66,7 +75,7 @@ export class Arcade{
             return joystickCheck
         }
 
-        let joystickNew = new Joystick(joystickNumber, numOfButtons, false)
+        let joystickNew = new Joystick(joystickNumber, numOfButtons, this.DEBUG)
         this.joysticks[joystickNumber] = joystickNew
         if (joystickNew) document.dispatchEvent(new CustomEvent("joystickcreated", { detail: joystickNumber }))
         return joystickNew
