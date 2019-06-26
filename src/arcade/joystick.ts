@@ -1,6 +1,6 @@
-class Joystick {
+export class Joystick {
 
-    private DEBUG           : boolean   = true;
+    private DEBUG           : boolean   = false;
 
     // BUT1 and BUT2 are the indexes of the redirect function. 
     // When both are pressed, redirect to homepage
@@ -15,8 +15,6 @@ class Joystick {
 
     private gamepad         : Gamepad
     private previousGamepad : Gamepad
-
-    private debugPanel      : DebugPanel
 
     // PROPERTIES
     // Axes as booleans
@@ -57,17 +55,24 @@ class Joystick {
             this.buttonEvents.push('joystick'+ this.JoystickNumber +'button' + (i))          
         }
         
-        if (this.DEBUG) { this.debugPanel = new DebugPanel(this, this.numberOfBUttons) }
+        
     }
 
     public update(): void {
         let gamepad = navigator.getGamepads()[this.gamepad.index]
-        if (gamepad) { this.readGamepad(gamepad) }
+        if (gamepad) {
+             this.readGamepad(gamepad)
+         } else  {
+             console.log("ehhh help?")
+         }
+
     }
 
     private readGamepad(gamepad: Gamepad) : void {
         for (let index = 0; index < this.numberOfBUttons; index++) {
             if (this.buttonPressed(gamepad.buttons[index]) && !this.buttonPressed(this.previousGamepad.buttons[index])) {
+                console.log("a button was pressed !!!!")
+                console.log(this.buttonEvents[index])
                 document.dispatchEvent(new Event(this.buttonEvents[index]))
             }
             if (this.buttonPressed(gamepad.buttons[this.BUT1]) && 
@@ -82,13 +87,7 @@ class Joystick {
         this.axes[0] = Math.round(gamepad.axes[0])
         this.axes[1] = Math.round(gamepad.axes[1])
         
-        if (this.DEBUG) {
-            // update the axes (x and y)
-            this.debugPanel.Axes[0] = this.axes[0]
-            this.debugPanel.Axes[1] = this.axes[1]
-
-            this.debugPanel.update()
-        }
+       
 
         this.previousGamepad = gamepad
     }
@@ -104,7 +103,7 @@ class Joystick {
     }
 
     public destroy() {
-        if(this.DEBUG) this.debugPanel.remove()
+       
     }
 }
 

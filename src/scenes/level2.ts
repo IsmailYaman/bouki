@@ -4,7 +4,6 @@ import { Key } from "../objects/key"
 import { Mazedoor } from "../objects/mazedoor"
 import { Enemy } from "../objects/enemy"
 import { Enemy1 } from "../objects/enemy1"
-import { Enemy2 } from "../objects/enemy2"
 import { EnemyRed } from "../objects/enemyred"
 import { Banana } from "../objects/banana";
 import { Star } from "../objects/star";
@@ -18,6 +17,7 @@ export class level2 extends Phaser.Scene {
     private mazedoor: Phaser.GameObjects.Group
     private banana: Phaser.GameObjects.Group
     private enemy: Phaser.GameObjects.Group
+    private enemy1: Phaser.GameObjects.Group
     private enemy3: Phaser.GameObjects.Group
 
     private collectedBanana = 0
@@ -75,12 +75,11 @@ export class level2 extends Phaser.Scene {
         this.banana = this.add.group()
         this.banana.add(new Banana(this, 530, 85), true)
 
-        this.enemy = this.add.group({runChildUpdate:true})
-        this.enemy.add(new Enemy1(this, 310, 200), true)
-        this.enemy.add(new Enemy(this, 400, 290), true)
-
-
+        
         this.enemy3 = this.add.group({runChildUpdate:true})
+        this.enemy3.add(new EnemyRed(this, 420, 65), true)
+        this.enemy3.add(new EnemyRed(this, 600, 195), true)
+        // this.enemy3.add(new EnemyRed(this, 50, 305), true)
         this.enemy3.add(new EnemyRed(this, 720, 390), true)
         
         
@@ -149,8 +148,6 @@ export class level2 extends Phaser.Scene {
         this.scoreField = this.add.text(150, 20, this.collectedBanana + ' Bananas collected', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
         
         // define collisions for bouncing, and overlaps for pickups
-        this.physics.add.collider(this.enemy, this.platforms)
-        this.physics.add.collider(this.enemy, this.mazedoor)
         this.physics.add.collider(this.enemy3, this.platforms)
         this.physics.add.collider(this.enemy3, this.mazedoor)
         this.physics.add.collider(this.stars, this.platforms)
@@ -160,7 +157,6 @@ export class level2 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
-        this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
         this.physics.add.overlap(this.player, this.enemy3, this.hitEnemy, null, this)
 
 
