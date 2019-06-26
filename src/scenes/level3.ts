@@ -1,7 +1,9 @@
 import { Player } from "../objects/player"
 import { Platform } from "../objects/platform"
+import { Platform1 } from "../objects/platform1"
 import { Key } from "../objects/key"
 import { Door1 } from "../objects/door1"
+import { Spikes } from "../objects/spikes"
 import { Enemy } from "../objects/enemy"
 import { Enemy1 } from "../objects/enemy1"
 import { Enemy2 } from "../objects/enemy2"
@@ -12,6 +14,7 @@ import { Star } from "../objects/star";
 export class level3 extends Phaser.Scene {
     
     private player : Player
+    private platform: Phaser.GameObjects.Group
     private platforms: Phaser.GameObjects.Group
     private stars: Phaser.GameObjects.Group
     private key: Phaser.GameObjects.Group
@@ -19,6 +22,7 @@ export class level3 extends Phaser.Scene {
     private door1: Phaser.GameObjects.Group
     private banana: Phaser.GameObjects.Group
     private enemy: Phaser.GameObjects.Group
+    private spikes: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
     private graphics
@@ -70,6 +74,9 @@ export class level3 extends Phaser.Scene {
         this.enemy.add(new Enemy(this, 60, 180), true)
         this.enemy.add(new EnemyRed(this, 200, 310), true)
 
+        this.spikes = this.add.group({runChildUpdate:true})
+        this.spikes.add(new Spikes(this, 90, -370), true)
+
 
 
         // this.door = this.add.group()
@@ -88,8 +95,7 @@ export class level3 extends Phaser.Scene {
         this.player = new Player(this)
 
         this.platforms = this.add.group({ runChildUpdate: true })
-        
-        
+    
 
         this.platforms.addMultiple([
             new Platform(this, 20, 20,"topleft"),
@@ -103,7 +109,7 @@ export class level3 extends Phaser.Scene {
             new Platform(this, 40, 220, "wall3"),
             new Platform(this, 20, 225, "caveleft"),
             new Platform(this, 385, 20, "cavetop"),
-            new Platform(this, 385, 430, "cavebot"),
+            
             new Platform(this, 750, 225, "caveright"),
             new Platform(this, 670, 112, "wall3b"),
             new Platform(this, 630, 310, "wall3b"),
@@ -113,14 +119,22 @@ export class level3 extends Phaser.Scene {
             
         ], true)
 
-        
+        this.platform = this.add.group({ runChildUpdate: true })
+        this.platform.addMultiple([
+            new Platform1(this, 385, 430, "cavebot"),
+        ], true)
+
         this.add.text(710, 20, 'Level 1', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('black', 5)
         this.scoreField = this.add.text(150, 20, this.collectedBanana + ' Bananas collected', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
         
         // define collisions for bouncing, and overlaps for pickups
+        // this.physics.add.collider(this.spikes, this.platforms)
+        this.physics.add.collider(this.spikes, this.platform)
+        this.physics.add.collider(this.enemy, this.platform)
         this.physics.add.collider(this.enemy, this.platforms)
         this.physics.add.collider(this.enemy, this.door1)
         this.physics.add.collider(this.stars, this.platforms)
+        this.physics.add.collider(this.player, this.platform)
         this.physics.add.collider(this.player, this.platforms)
         this.physics.add.collider(this.player, this.door)
         this.physics.add.collider(this.player, this.door1)
@@ -129,6 +143,7 @@ export class level3 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
         this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
+        this.physics.add.overlap(this.player, this.spikes, this.hitEnemy, null, this)
 
 
         this.add.image(400, 20, 'heart')
