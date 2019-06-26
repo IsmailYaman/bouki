@@ -9,7 +9,7 @@ import { EnemyRed } from "../objects/enemyred";
 
 import { Banana } from "../objects/banana";
 import { Star } from "../objects/star";
-import { Arcade} from "../arcade/arcade"
+
 
 export class level1 extends Phaser.Scene {
     
@@ -176,7 +176,7 @@ export class level1 extends Phaser.Scene {
         this.stars.remove(star, true, true)
         this.registry.values.score++
         this.collectedBanana++
-        console.log(this.registry.values.score + ' sterren')
+        console.log(this.registry.values.score + ' bananen')
 
         // TO DO check if we have all the stars, then go to the end scene'
         this.scoreField.text = this.collectedBanana + ' Bananas collected'
