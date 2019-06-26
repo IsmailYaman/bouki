@@ -1,4 +1,11 @@
+import { Arcade } from "../arcade/arcade"
+import { Game } from "../app"
+
+
 export class StartScene extends Phaser.Scene {
+    private arcade: Arcade
+    private nextGameListener: EventListener
+    
 
     
     constructor() {
@@ -12,6 +19,11 @@ export class StartScene extends Phaser.Scene {
     }
 
     create(): void {
+
+        let g = this.game as Game
+        this.arcade = g.arcade
+
+
         this.add.image(0, 0, 'jungle').setOrigin(0, 0)
 
         // add another image here
@@ -28,5 +40,22 @@ export class StartScene extends Phaser.Scene {
             btn1.on('pointerdown', (pointer) => {
                 this.scene.start('level1')
             })
+            console.log("listen to joystick...")
+            console.log(this.arcade)
+            this.nextGameListener = () => this.nextGame()
+            document.addEventListener("joystick0button0", this.nextGameListener)
+        }
+    
+        private nextGame() {
+            document.removeEventListener("joystick0button0", this.nextGameListener)
+            this.scene.start('level1')
+        }
+    
+        public update(){
+            for (let joystick of this.arcade.Joysticks) {
+                joystick.update()
+            }
+        }
+    
     }
-}
+
