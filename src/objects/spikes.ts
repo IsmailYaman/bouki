@@ -12,8 +12,6 @@ export class Spikes extends Phaser.Physics.Arcade.Sprite {
 
         this.setBounce(1)
         // this.setCollideWorldBounds(true)
-
-        
         this.setVelocity(0, 20);
 
     }
