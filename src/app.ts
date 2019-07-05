@@ -7,7 +7,7 @@ import { level3} from "./scenes/level3"
 import { EndScene } from "./scenes/end-scene"
 import { WinScene } from "./scenes/win-scene"
 
-
+//Define borders and connect scenes
 const config: GameConfig = {
     width: 770,
     height: 450,
@@ -21,7 +21,6 @@ const config: GameConfig = {
         default: "arcade",
         arcade: {
             debug: false, 
-            // gravity: { y: 400 }
         }
     },
     render: { pixelArt: true }

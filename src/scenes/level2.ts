@@ -4,7 +4,6 @@ import { Key } from "../objects/key"
 import { Mazedoor } from "../objects/mazedoor"
 import { Enemy } from "../objects/enemy"
 import { Enemy1 } from "../objects/enemy1"
-import { Enemy2 } from "../objects/enemy2"
 import { EnemyRed } from "../objects/enemyred"
 import { Banana } from "../objects/banana";
 import { Star } from "../objects/star";
@@ -19,10 +18,8 @@ export class level2 extends Phaser.Scene {
     private banana: Phaser.GameObjects.Group
     private enemy: Phaser.GameObjects.Group
     private enemy3: Phaser.GameObjects.Group
-
     private collectedBanana = 0
     private scoreField
-
     public lives = 300
 
     constructor() {
@@ -31,20 +28,22 @@ export class level2 extends Phaser.Scene {
 
     init(): void {
         console.log("dit is Level 2")
+
+        //Reset banana score
         this.registry.values.score = 0
     }
 
+    //Click on screen to skip level 
     create(): void {
         this.input.once('pointerdown', (pointer) => {
             this.scene.start('level3')
             console.log('volgend level')
         })
 
-
+        //Background
         this.add.image(0, 0, 'ground').setOrigin(0, 0)  
           
-
-        
+        //Stars are bananas
         this.stars = this.add.group()
         this.stars.add(new Star(this, 210, 140), true)
         this.stars.add(new Star(this, 65, 190), true)
@@ -65,29 +64,30 @@ export class level2 extends Phaser.Scene {
         this.stars.add(new Star(this, 710, 80), true)
         this.stars.add(new Star(this, 710, 190), true)
 
-
-        this.key = this.add.group()
-        this.key.add(new Key(this, 320, 86), true)
-        
-        this.mazedoor = this.add.group()
-        this.mazedoor.add(new Mazedoor(this, 663, 190), true)
-
-        this.banana = this.add.group()
-        this.banana.add(new Banana(this, 530, 85), true)
-
+        //Horizontal & Vertical green enemy
         this.enemy = this.add.group({runChildUpdate:true})
         this.enemy.add(new Enemy1(this, 310, 200), true)
         this.enemy.add(new Enemy(this, 400, 290), true)
 
-
+        //Horizontal red enemy
         this.enemy3 = this.add.group({runChildUpdate:true})
         this.enemy3.add(new EnemyRed(this, 720, 390), true)
-        
-        
 
-        // TODO add player
+        //Door banana
+        this.mazedoor = this.add.group()
+        this.mazedoor.add(new Mazedoor(this, 663, 190), true)
+
+        //Key
+        this.key = this.add.group()
+        this.key.add(new Key(this, 320, 86), true)
+        
+        //Goal banana       
+        this.banana = this.add.group()
+        this.banana.add(new Banana(this, 530, 85), true)      
+
         this.player = new Player(this)
 
+        //All platforms in the level
         this.platforms = this.add.group({ runChildUpdate: true })
         this.platforms.addMultiple([
 
@@ -118,7 +118,6 @@ export class level2 extends Phaser.Scene {
             new Platform(this, 313, 141, "mazewall"),            
             new Platform(this, 360, 204, "mazewall1"),                    
            
-            
             //Borders
             new Platform(this, 20, 20,"topleft"),
             new Platform(this, 750, 20,"topright"),
@@ -131,24 +130,14 @@ export class level2 extends Phaser.Scene {
 
         ], true)
         
+        //Shade
         this.add.image(0, 0, 'shade').setOrigin(0, 0)
 
-
-
-
-
-
-
-
-
-
-
-
-
+        //Text up right & Score field up left
         this.add.text(710, 20, 'Level 2', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('black', 5)
         this.scoreField = this.add.text(150, 20, this.collectedBanana + ' Bananas collected', { fontFamily: 'Arial Black', fontSize: 24, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
         
-        // define collisions for bouncing, and overlaps for pickups
+        //Defined collision and overlaps
         this.physics.add.collider(this.enemy, this.platforms)
         this.physics.add.collider(this.enemy, this.mazedoor)
         this.physics.add.collider(this.enemy3, this.platforms)
@@ -163,24 +152,25 @@ export class level2 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
         this.physics.add.overlap(this.player, this.enemy3, this.hitEnemy, null, this)
 
-
+        //World bounds
         this.physics.world.bounds.width = 770
         this.physics.world.bounds.height = 450
-        
-        this.cameras.main.setSize(770, 450)
-        this.cameras.main.setBounds(0, 0, 0, 0)
     }
 
-    private collectStar(player : Player , star) : void {
-        this.stars.remove(star, true, true)
-        this.registry.values.score++
-        this.collectedBanana++
-        console.log(this.registry.values.score + ' sterren')
-
-        // TO DO check if we have all the stars, then go to the end scene'
-        this.scoreField.text = this.collectedBanana + ' Bananas collected'
-    
+    //If enemy hit, you die
+    private hitEnemy(player:Player, enemy){
+        console.log("Je bent dood")
+        this.scene.start('EndScene')
     }
+
+    //If banana hit, you go to next level
+    private hitBanana(player:Player, banana){
+        this.banana.remove(banana, true)
+        console.log("Volgend level")
+        this.scene.start('level3')
+    }
+
+    // if key hit, door opens
     private hitKey(player:Player, key){
         console.log(key);
         
@@ -189,20 +179,16 @@ export class level2 extends Phaser.Scene {
         console.log("Deur is open!")
     }
 
-    private hitEnemy(player:Player, enemy){
-        console.log("Je bent dood")
-        this.scene.start('EndScene')
-    }
-    
-    private hitBanana(player:Player, banana){
-        this.banana.remove(banana, true)
-        console.log("Volgend level")
-        this.scene.start('level3')
+    //If collected banana, add +1 to score
+    private collectStar(player : Player , star) : void {
+        this.stars.remove(star, true, true)
+        this.registry.values.score++
+        this.collectedBanana++
+        console.log(this.registry.values.score + ' sterren')
+        this.scoreField.text = this.collectedBanana + ' Bananas collected'
     }
 
     update(){
         this.player.update()
-        // this.add.text(170, 50,' Sterren', { fontFamily: 'Arial Black', fontSize: 40, color: '#2ac9be' }).setOrigin(0.5).setStroke('#000000', 5)
     }
-
 }
