@@ -36,4 +36,4 @@ export class StartScene extends Phaser.Scene {
             this.scene.start('level1')
         })
     }
-
+}

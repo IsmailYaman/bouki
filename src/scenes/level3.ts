@@ -1,11 +1,13 @@
 import { Player } from "../objects/player"
 import { Platform } from "../objects/platform"
+import { Platform1 } from "../objects/platform1"
 import { Key } from "../objects/key"
 import { Door1 } from "../objects/door1"
 import { Enemy } from "../objects/enemy"
 import { Enemy1 } from "../objects/enemy1"
 import { Enemy2 } from "../objects/enemy2"
 import { EnemyRed } from "../objects/enemyred";
+import { Spikes } from "../objects/spikes";
 import { Banana } from "../objects/banana";
 import { Star } from "../objects/star";
 
@@ -13,12 +15,14 @@ export class level3 extends Phaser.Scene {
     
     private player : Player
     private platforms: Phaser.GameObjects.Group
+    private platform: Phaser.GameObjects.Group
     private stars: Phaser.GameObjects.Group
     private key: Phaser.GameObjects.Group
     private door: Phaser.GameObjects.Group
     private door1: Phaser.GameObjects.Group
     private banana: Phaser.GameObjects.Group
     private enemy: Phaser.GameObjects.Group
+    private spikes: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
     private graphics

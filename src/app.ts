@@ -27,12 +27,8 @@ const config: GameConfig = {
 };
 
 export class Game extends Phaser.Game {
-    public arcade:Arcade
     constructor(config: GameConfig) {
         super(config)
-
-        // create the arcade once, otherwise we keep connecting/disconnecting every scene
-        this.arcade = new Arcade()
     }
 }
 
