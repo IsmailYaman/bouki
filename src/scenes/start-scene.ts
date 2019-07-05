@@ -1,4 +1,11 @@
+import { Arcade } from "../arcade/arcade"
+import { Game } from "../app"
+
+
 export class StartScene extends Phaser.Scene {
+    private arcade: Arcade
+    private nextGameListener: EventListener
+    
 
     
     constructor() {
@@ -29,4 +36,4 @@ export class StartScene extends Phaser.Scene {
             this.scene.start('level1')
         })
     }
-}
+

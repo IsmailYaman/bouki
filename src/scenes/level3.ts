@@ -1,9 +1,7 @@
 import { Player } from "../objects/player"
 import { Platform } from "../objects/platform"
-import { Platform1 } from "../objects/platform1"
 import { Key } from "../objects/key"
 import { Door1 } from "../objects/door1"
-import { Spikes } from "../objects/spikes"
 import { Enemy } from "../objects/enemy"
 import { Enemy1 } from "../objects/enemy1"
 import { Enemy2 } from "../objects/enemy2"
@@ -14,7 +12,6 @@ import { Star } from "../objects/star";
 export class level3 extends Phaser.Scene {
     
     private player : Player
-    private platform: Phaser.GameObjects.Group
     private platforms: Phaser.GameObjects.Group
     private stars: Phaser.GameObjects.Group
     private key: Phaser.GameObjects.Group
@@ -22,7 +19,6 @@ export class level3 extends Phaser.Scene {
     private door1: Phaser.GameObjects.Group
     private banana: Phaser.GameObjects.Group
     private enemy: Phaser.GameObjects.Group
-    private spikes: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
     private graphics
@@ -137,7 +133,6 @@ export class level3 extends Phaser.Scene {
         this.physics.add.collider(this.enemy, this.platforms)
         this.physics.add.collider(this.enemy, this.door1)
         this.physics.add.collider(this.stars, this.platforms)
-        this.physics.add.collider(this.player, this.platform)
         this.physics.add.collider(this.player, this.platforms)
         this.physics.add.collider(this.player, this.door)
         this.physics.add.collider(this.player, this.door1)
@@ -146,7 +141,6 @@ export class level3 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
         this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
-        this.physics.add.overlap(this.player, this.spikes, this.hitEnemy, null, this)
 
         //World bounds
         this.physics.world.bounds.width = 770

@@ -17,6 +17,7 @@ export class level2 extends Phaser.Scene {
     private mazedoor: Phaser.GameObjects.Group
     private banana: Phaser.GameObjects.Group
     private enemy: Phaser.GameObjects.Group
+    private enemy1: Phaser.GameObjects.Group
     private enemy3: Phaser.GameObjects.Group
     private collectedBanana = 0
     private scoreField
@@ -71,6 +72,9 @@ export class level2 extends Phaser.Scene {
 
         //Horizontal red enemy
         this.enemy3 = this.add.group({runChildUpdate:true})
+        this.enemy3.add(new EnemyRed(this, 420, 65), true)
+        this.enemy3.add(new EnemyRed(this, 600, 195), true)
+        // this.enemy3.add(new EnemyRed(this, 50, 305), true)
         this.enemy3.add(new EnemyRed(this, 720, 390), true)
 
         //Door banana
@@ -149,7 +153,6 @@ export class level2 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
         this.physics.add.overlap(this.player, this.key, this.hitKey, null, this)
         this.physics.add.overlap(this.player, this.banana, this.hitBanana, null, this)
-        this.physics.add.overlap(this.player, this.enemy, this.hitEnemy, null, this)
         this.physics.add.overlap(this.player, this.enemy3, this.hitEnemy, null, this)
 
         //World bounds

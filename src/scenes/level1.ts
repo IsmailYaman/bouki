@@ -8,7 +8,7 @@ import { Enemy1 } from "../objects/enemy1"
 import { EnemyRed } from "../objects/enemyred";
 import { Banana } from "../objects/banana";
 import { Star } from "../objects/star";
-
+import { Arcade} from "../arcade/arcade"
 
 export class level1 extends Phaser.Scene {
     
